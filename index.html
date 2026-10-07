@@ -4,20 +4,56 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ডিজিটাল মাইকিং ও পোস্টার - 01884237859</title>
 <style>
-body{font-family:SolaimanLipi,sans-serif;background:#f0fdf4;margin:0}
-.header{background:linear-gradient(135deg,#065f46,#10b981);color:#fff;text-align:center;padding:25px 10px;position:sticky;top:0;z-index:10}
-.card{background:#fff;margin:15px;padding:20px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,.1)}
-label{font-weight:700;display:block;margin-top:10px;font-size:14px}
-input,select,textarea{width:100%;padding:14px;margin:5px 0;border:2px solid #d1fae5;border-radius:10px;font-size:16px;box-sizing:border-box}
-button{width:100%;padding:14px;border:none;border-radius:10px;font-size:17px;font-weight:700;color:#fff;cursor:pointer;margin-top:10px}
+body{font-family:SolaimanLipi,sans-serif;background:#f0fdf4;margin:0;padding-bottom:80px}
+.header{background:linear-gradient(135deg,#065f46,#10b981);color:#fff;text-align:center;padding:20px}
+.card{background:#fff;margin:15px;padding:18px;border-radius:15px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+label{font-weight:700;display:block;margin-top:12px}
+input,select,textarea{width:100%;padding:13px;margin:6px 0;border:2px solid #a7f3d0;border-radius:10px;font-size:16px;box-sizing:border-box}
+button{width:100%;padding:14px;border:none;border-radius:10px;font-size:17px;font-weight:700;color:#fff;margin-top:10px}
 .red{background:#dc2626}.green{background:#065f46}.blue{background:#2563eb}.orange{background:#ea580c}
-.poster-preview{width:100%;aspect-ratio:3/4;background:linear-gradient(180deg,#065f46 0%,#047857 40%,#fff 40%);border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:15px;box-sizing:border-box;border:5px solid #065f46;margin-top:15px}
-.contact-bar{background:#111;color:#fff;text-align:center;padding:12px;position:fixed;bottom:0;left:0;right:0;display:flex;gap:8px;justify-content:center}
-.contact-bar a{flex:1;padding:10px;border-radius:8px;color:#fff;text-decoration:none;font-weight:700}
+.poster{width:100%;aspect-ratio:3/4;background:#fff;border:4px solid #065f46;border-radius:12px;text-align:center;padding:10px;box-sizing:border-box}
+.badge{background:#dc2626;color:#fff;padding:8px 18px;border-radius:20px;display:inline-block;font-weight:700;margin-top:10px}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;gap:8px;padding:10px}
+.bar a{flex:1;text-align:center;padding:12px;border-radius:8px;color:#fff;text-decoration:none;font-weight:700}
 </style>
 </head>
 <body>
 <div class="header">
-<h1 style="margin:0">🎤 ডিজিটাল মাইকিং ও পোস্টার</h1>
-<p style="margin:5px 0">১ মিনিটে অডিও ও পোস্টার বানান</p>
-<a href="tel:01884237859" style="background:#fff;color:#065f46;padding:6px 15px;border-radius:20px;text-decoration:none;font-weight:700
+<h2 style="margin:0">🎤 ডিজিটাল মাইকিং ও পোস্টার মেকার</h2>
+<p>তারিখ সহ অডিও + পোস্টার ১ মিনিটে</p>
+<a href="tel:01884237859" style="background:#fff;color:#065f46;padding:6px 18px;border-radius:20px;text-decoration:none;font-weight:700">📞 01884237859</a>
+</div>
+
+<div class="card">
+<h3 style="color:#065f46;margin:0">🔊 অডিও মাইকিং</h3>
+<label>প্রার্থীর নাম</label><input id="name" value="মোঃ রাজীব আহমদ">
+<label>পদবী</label><select id="podobi"><option>চেয়ারম্যান পদপ্রার্থী</option><option>মেম্বার পদপ্রার্থী</option><option>মেয়র পদপ্রার্থী</option><option>কাউন্সিলর পদপ্রার্থী</option></select>
+<label>মার্কা</label><input id="marka" value="আনারস">
+<label>এলাকা</label><input id="area" value="৫ নং ওয়ার্ড, সিলেট">
+<label>🗓️ নির্বাচনের তারিখ (যেটা মাইকে বলবে)</label><input id="tarikh" value="আগামী ২৮ শে ডিসেম্বর, রোজ রবিবার">
+<textarea id="script" rows="4" placeholder="স্ক্রিপ্ট এখানে আসবে"></textarea>
+<button class="blue" onclick="makeScript()">✨ তারিখ সহ স্ক্রিপ্ট বানান</button>
+<button class="red" onclick="playAudio()">▶️ অডিও শুনুন</button>
+<button class="green" onclick="stopAudio()">⏹️ বন্ধ করুন</button>
+<p id="status" style="text-align:center;font-weight:700;color:#065f46"></p>
+</div>
+
+<div class="card">
+<h3 style="color:#065f46;margin:0">🖼️ পোস্টার মেকার</h3>
+<label>পোস্টারে নাম</label><input id="pName" value="মোঃ রাজীব আহমদ" oninput="makePoster()">
+<label>মার্কা লেখা</label><input id="pMarka" value="আনারস মার্কায় ভোট দিন" oninput="makePoster()">
+<label>স্লোগান</label><input id="pSlogan" value="উন্নয়নের জন্য, আপনার ভোট দিন" oninput="makePoster()">
+<div id="posterBox" class="poster">
+<div style="background:#065f46;color:#fff;padding:10px;border-radius:8px">আসন্ন নির্বাচন</div>
+<div style="font-size:70px;margin-top:10px">👤</div>
+<h1 id="ppName" style="color:#065f46;margin:8px 0">মোঃ রাজীব আহমদ</h1>
+<div id="ppMarka" class="badge">আনারস মার্কায় ভোট দিন</div>
+<p id="ppSlogan" style="font-weight:700">উন্নয়নের জন্য, আপনার ভোট দিন</p>
+<p style="background:#111;color:#fff;padding:6px;border-radius:15px;margin-top:15px;font-size:13px">যোগাযোগ: 01884237859</p>
+</div>
+<button class="orange" onclick="downloadPoster()">⬇️ পোস্টার ডাউনলোড করুন</button>
+</div>
+
+<div class="bar">
+<a href="tel:01884237859" style="background:#10b981">📞 কল</a>
+<a href
