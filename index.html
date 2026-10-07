@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Miking Sylhet - Audio + Poster 01884237859</title>
+<style>
+body{font-family:sans-serif;margin:0;background:#f0f2f5}
+.header{background:#0a5c36;color:white;padding:20px;text-align:center}
+.box{background:white;margin:12px;padding:16px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+textarea,input,select{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:8px;box-sizing:border-box;font-size:16px}
+.btn{background:#0a5c36;color:white;padding:14px;border:none;border-radius:8px;width:100%;font-weight:bold;font-size:17px;margin:6px 0;cursor:pointer}
+.btn-wa{background:#25D366}
+.btn-red{background:#c62828}
+canvas{width:100%;border:2px solid #0a5c36;border-radius:12px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>🎤 ডিজিটাল মাইকিং সার্ভিস</h1>
+<p>অডিও + পোস্টার মেকার | 01884237859</p>
+</div>
+
+<div class="box">
+<h3>🔊 নির্বাচনী অডিও মাইকিং বানান</h3>
+<input id="aName" placeholder="প্রার্থীর নাম">
+<input id="aMarka" placeholder="মার্কা">
+<input id="aArea" placeholder="এলাকা">
+<textarea id="aScript" rows="5">সম্মানিত এলাকাবাসী, আসসালামু আলাইকুম। আসন্ন নির্বাচনে মেম্বার পদপ্রার্থী জনাব প্রার্থীকে আনারস মার্কায় ভোট দিয়ে জয়যুক্ত করুন।</textarea>
+<button class="btn btn-red" onclick="playAudio()">▶️ অডিও শুনুন</button>
+<button class="btn" onclick="stopAudio()">⏹️ বন্ধ করুন</button>
+<button class="btn" onclick="autoScript()">✨ অটো স্ক্রিপ্ট বানান</button>
+</div>
+
+<div class="box">
+<h3>🖼️ পোস্টার বানান</h3>
+<input id="pName" placeholder="প্রার্থীর নাম">
+<input id="pPost" placeholder="পদবী">
+<input type="file" id="pPhoto" accept="image/*">
+<button class="btn" onclick="makePoster()">পোস্টার বানান</button>
+<button class="btn btn-wa" onclick="downloadPoster()">⬇️ ডাউনলোড</button>
+<canvas id="c" width="1080" height="1350"></canvas>
+</div>
+
+<div class="box" style="text-align:center">
+<a class="btn btn-wa" href="https://wa.me/8801884237859">WhatsApp 01884237859</a>
+</div>
+
+<script>
+let uploadedImg=null;
+document.getElementById('pPhoto').addEventListener('change', e=>{
+ let r=new FileReader(); r.onload=ev=>{uploadedImg=new Image(); uploadedImg.src=ev.target.result; uploadedImg.onload=makePoster}; r.readAsDataURL(e.target.files[0]);
+});
+function autoScript(){
+ let name=document.getElementById('aName').value||"প্রার্থী";
+ let marka=document.getElementById('aMarka').value||"মার্কা";
+ let area=document.getElementById('aArea').value||"এলাকা";
+ document.getElementById('aScript').value=`সম্মানিত ${area} বাসী, আসসালামু আলাইকুম। আসন্ন নির্বাচনে ${area} থেকে সৎ ও যোগ্য প্রার্থী জনাব ${name} কে ${marka} মার্কায় আপনাদের মূল্যবান ভোট দিয়ে জয়যুক্ত করুন।`;
+}
+function playAudio(){ let t=document.getElementById('aScript').value; let u=new SpeechSynthesisUtterance(t); u.lang='bn-BD'; u.rate=0.9; speechSynthesis.cancel(); speechSynthesis.speak(u); }
+function stopAudio(){ speechSynthesis.cancel(); }
+function makePoster(){
+ let name=document.getElementById('aName').value || document.getElementById('pName').value || "";
+ let post=document.getElementById('pPost').value || "";
+ let marka=document.getElementById('aMarka').value || "";
+ let c=document.getElementById('c'); let x=c.getContext('2d');
+ x.fillStyle="#0a5c36"; x.fillRect(0,0,1080,1350); x.fillStyle="#fff"; x.fillRect(15,15,1050,1320);
+ x.fillStyle="#0a5c36"; x.fillRect(15,15,1050,140); x.fillStyle="#fff"; x.font="bold 48px sans-serif"; x.textAlign="center"; x.fillText("নির্বাচনী পোস্টার",540,100);
+ x.fillStyle="#eee"; x.beginPath(); x.arc(540,380,180,0,Math.PI*2); x.fill();
+ if(uploadedImg){ x.save(); x.beginPath(); x.arc(540,380,180,0,Math.PI*2); x.clip(); x.drawImage(uploadedImg,360,200,360,360); x.restore(); }
+ x.fillStyle="#000"; x.font="bold 60px
